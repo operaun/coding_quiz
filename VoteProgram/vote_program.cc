@@ -75,11 +75,9 @@ void VoteTracker::AddVote(std::string const& name) {
 
   if (found == name_to_vote_map_.end()) { // Never Voted
     name_to_vote_map_.insert(std::make_pair(name, 1));
-//    std::cout << "\t>> New: " << name << std::endl;
     if (most_voted_value_ <= 1) // TODO(jongmin): consider optimizing, 
       UpdateVoteStatus(name, 1);
   } else {
-//    std::cout << "\t>> Voted: " << name << ", current: " << found->second+1 << std::endl;
     found->second++; // Increment vote count
     if (found->second >= most_voted_value_)
       UpdateVoteStatus(found->first, found->second);
