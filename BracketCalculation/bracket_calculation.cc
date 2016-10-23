@@ -82,8 +82,11 @@ void BracketCalculator::Calculate(std::string const& bracket_string) {
         result_for_this_calculation
           = (result_for_this_calculation + value_before_check) % 100000000;
       }
-    } else { // Exception
-      result_for_this_calculation = 0;
+    } else { // exception
+      const char* exception_char = &processing_string_[processing_index_];
+      // Check for Windows linefeed: if it is, actually this is not exception
+      if (*exception_char != '\r')
+        result_for_this_calculation = 0;
       break;
     }
   }
